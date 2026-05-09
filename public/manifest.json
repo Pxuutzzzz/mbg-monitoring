@@ -1,0 +1,15 @@
+{
+  "name": "MBG Monitoring System",
+  "short_name": "MBG Monitor",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#071e49",
+  "theme_color": "#071e49",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3063/3063822.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
