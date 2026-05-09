@@ -1,64 +1,73 @@
-# 🚀 MBG Monitoring System - SPARK 2026
+# 🥗 MBG Monitoring System — Badan Gizi Nasional
 
-Sistem Monitoring Makan Bergizi Gratis (MBG) untuk Badan Gizi Nasional (BGN).
-Dibuat oleh: **Putri Indah Cahyani**
-
-## 🛠 Teknologi
-- **Backend**: Laravel 11 + MySQL
-- **Frontend**: Bootstrap 5 + AdminLTE + Leaflet Maps + Chart.js
-- **Real-time**: Node.js + Socket.io (Port 3000)
-- **PWA**: Mobile-first, Installable
-
-## 🎨 Branding BGN Official
-- `--bgn-primary`: `#071e49` (Biru Gelap)
-- `--bgn-success`: `#92d05d` (Hijau KPI)
-- `--bgn-info`: `#b5e0ea` (Biru Pastel)
-- `--bgn-gold`: `#d1b06c` (Emas 2045)
-
-## 📋 Cara Menjalankan (Local XAMPP)
-
-1. **Database Setup**:
-   - Buka phpMyAdmin.
-   - Buat database baru bernama `mbg_monitoring`.
-   
-2. **Install & Migrate**:
-   ```bash
-   composer install
-   php artisan migrate:fresh --seed
-   ```
-
-3. **Jalankan Laravel**:
-   ```bash
-   php artisan serve
-   ```
-
-4. **Jalankan Real-time Server** (Membutuhkan Node.js):
-   ```bash
-   cd server
-   npm init -y
-   npm install socket.io
-   node server.js
-   ```
-
-## 🎯 Skenario Demo SPARK (7 Menit)
-
-1. **Dashboard Publik (0-2 Menit)**:
-   - Tunjukkan KPI Cards dengan warna resmi BGN.
-   - Jelaskan Budget Breakdown Pie Chart (Rp15k/porsi).
-   - Tunjukkan Map Yogyakarta yang siap menerima update live.
-
-2. **Driver Tracking (2-4 Menit)**:
-   - Buka `/driver` di browser (simulasi HP).
-   - Klik **"Mulai Tracking GPS"**.
-   - (Buka Dashboard di tab lain) Lihat marker bergerak secara real-time mengikuti koordinat GPS driver.
-
-3. **Keuangan & Nutrisi (4-6 Menit)**:
-   - Tunjukkan tabel breakdown biaya harian di `/finance`.
-   - Tunjukkan hasil verifikasi AKG di `/nutrition` (Kalori, Protein, Karbo).
-
-4. **Closing (6-7 Menit)**:
-   - Jelaskan dampak transparansi anggaran Rp10k bahan baku terhadap pencegahan korupsi dan kualitas gizi Generasi Emas 2045.
+Sistem Transparansi Monitoring Program **Makan Bergizi Gratis (MBG)** berbasis Laravel 11, sesuai Juklak BGN 2026.
 
 ---
-**© 2026 Badan Gizi Nasional | Generasi Emas 2045**
-🏆 *Juara SPARK Technology Innovation Competition!*
+
+## 📋 Fitur Utama
+
+- 🗺️ **Peta Nasional** — 38 Dapur SPPG dari Aceh sampai Papua
+- 🥗 **Katalog Menu Gizi** — Per target grup (PAUD/TK, SD, SMP, SMA, Pesantren sub-jenjang, Ibu Hamil, dll)
+- 💰 **Transparansi Keuangan** — Rincian biaya per komponen menu + standar BGN
+- 🚚 **GPS Tracking Driver** — Pemantauan pengiriman real-time
+- 🔐 **Admin Panel** — CRUD lengkap untuk SPPG, Menu, Keuangan, Pengguna
+
+---
+
+## 🚀 Cara Instalasi Lokal
+
+```bash
+git clone https://github.com/Pxuutzzzz/mbg-monitoring.git
+cd mbg-monitoring
+composer install
+cp .env.example .env
+php artisan key:generate
+# Isi konfigurasi database di .env
+php artisan migrate
+php artisan db:seed
+php artisan serve
+```
+
+---
+
+## 🔐 Akun Default
+
+| Role | Email | Password |
+|------|-------|----------|
+| Admin | admin@bgn.go.id | password |
+| Driver | driver.java@bgn.go.id | password |
+
+---
+
+## 🌐 Deploy ke Railway (Gratis)
+
+1. Buka [railway.app](https://railway.app) → Login dengan GitHub
+2. **New Project** → **Deploy from GitHub repo** → pilih `mbg-monitoring`
+3. **Add Plugin** → **MySQL**
+4. Set **Environment Variables**:
+   ```
+   APP_KEY=        ← generate: php artisan key:generate --show
+   APP_ENV=production
+   APP_DEBUG=false
+   APP_URL=        ← URL dari Railway (muncul setelah deploy)
+   DB_HOST=        ← dari Railway MySQL plugin
+   DB_PORT=3306
+   DB_DATABASE=    ← dari Railway MySQL plugin
+   DB_USERNAME=    ← dari Railway MySQL plugin
+   DB_PASSWORD=    ← dari Railway MySQL plugin
+   ```
+5. Railway otomatis build & deploy!
+
+---
+
+## 📊 Standar BGN 2026
+
+- Bahan baku: **Rp 8.000 – 10.000/porsi**
+- Dana operasional: **Rp 3.000/porsi**
+- Maks produksi per SPPG: **2.500 porsi/hari**
+
+---
+
+## 🏆 SPARK 2026
+
+Dikembangkan untuk kompetisi **SPARK 2026** oleh tim MBG Monitoring.
