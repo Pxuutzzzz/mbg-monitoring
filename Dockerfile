@@ -39,7 +39,9 @@ RUN sed -i 's/DB_CONNECTION=.*/DB_CONNECTION=sqlite/' .env && \
     echo "DB_DATABASE=/var/www/html/database/database.sqlite" >> .env && \
     sed -i 's/APP_ENV=.*/APP_ENV=production/' .env && \
     sed -i 's/APP_DEBUG=.*/APP_DEBUG=false/' .env && \
-    sed -i 's/SESSION_DRIVER=.*/SESSION_DRIVER=file/' .env
+    sed -i 's/SESSION_DRIVER=.*/SESSION_DRIVER=file/' .env && \
+    sed -i 's|APP_URL=.*|APP_URL=http://localhost|' .env && \
+    echo "ASSET_URL=" >> .env
 
 # Generate APP_KEY
 RUN php artisan key:generate --force
