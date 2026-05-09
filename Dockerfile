@@ -44,7 +44,8 @@ RUN sed -i 's/DB_CONNECTION=.*/DB_CONNECTION=sqlite/' .env && \
 # Generate APP_KEY
 RUN php artisan key:generate --force
 
-# Set permissions
+# Clear any stale cache
+RUN php artisan config:clear && php artisan view:clear || true
 RUN chmod -R 775 storage bootstrap/cache database
 
 EXPOSE 8080

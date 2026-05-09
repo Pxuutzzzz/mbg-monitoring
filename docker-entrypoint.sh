@@ -18,14 +18,6 @@ php artisan migrate --force
 echo "🌱 Seeding database..."
 php artisan db:seed --force
 
-# Cache config
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
-
-# Gunakan PORT dari environment variable Railway (default 8080)
-PORT=${PORT:-8080}
-
 echo "✅ Ready! Starting PHP server on port $PORT..."
 
 # Start PHP built-in server (tanpa Apache, tanpa konflik MPM)
