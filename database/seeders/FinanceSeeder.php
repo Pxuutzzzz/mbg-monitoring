@@ -75,11 +75,22 @@ class FinanceSeeder extends Seeder
 
     public function run(): void
     {
-        \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        $driver = \Illuminate\Support\Facades\DB::getDriverName();
+        if ($driver === 'sqlite') {
+            \Illuminate\Support\Facades\DB::statement('PRAGMA foreign_keys = OFF;');
+        } else {
+            \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        }
+
         \App\Models\Nutrition::truncate();
         FinancialRecord::truncate();
         Delivery::truncate();
-        \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        if ($driver === 'sqlite') {
+            \Illuminate\Support\Facades\DB::statement('PRAGMA foreign_keys = ON;');
+        } else {
+            \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        }
 
         $sppgs = Sppg::all();
         if ($sppgs->isEmpty()) return;

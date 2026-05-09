@@ -13,13 +13,24 @@ class SppgSeeder extends Seeder
      */
     public function run(): void
     {
-        // Truncate deliveries & nutrition first because they depend on sppg
-        \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        // Disable foreign key checks (compatible MySQL & SQLite)
+        $driver = \Illuminate\Support\Facades\DB::getDriverName();
+        if ($driver === 'sqlite') {
+            \Illuminate\Support\Facades\DB::statement('PRAGMA foreign_keys = OFF;');
+        } else {
+            \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        }
+
         \App\Models\Nutrition::truncate();
         \App\Models\FinancialRecord::truncate();
         \App\Models\Delivery::truncate();
         Sppg::truncate();
-        \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        if ($driver === 'sqlite') {
+            \Illuminate\Support\Facades\DB::statement('PRAGMA foreign_keys = ON;');
+        } else {
+            \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        }
 
         $sppgs = [
             // ── SUMATERA ──────────────────────────────────────────────────────
